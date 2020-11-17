@@ -17,9 +17,10 @@ function App() {
         <h2>Sponsor</h2>
         <Navbar />
         <Switch>
-          <Route path="/about"><About /></Route>
-          <Route path="/login"><Login /></Route>
-          <Route path="/register"><Register /></Route>
+          <Route path="/about"><About/></Route>
+          <Route path="/login"><Login/></Route>
+          <Route path="/register"><Register/></Route>
+          <Route path="/"><Login/></Route>
         </Switch>
       </div>
     </Router>
