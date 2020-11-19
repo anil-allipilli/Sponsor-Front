@@ -3,9 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+
 } from "react-router-dom";
-import './App.css';
+import './css/App.css';
 import Navbar from "./components/Navbar"
 import Login from "./components/Login"
 import About from "./components/About"
@@ -22,9 +22,9 @@ import SponseeDetail from "./components/SponseeDetail"
 function App() {
   return (
     <Router>
-      <div className="App">
-        <h2>Sponsor</h2>
-        <Navbar />
+      <Navbar />
+      <div className="App">        
+        
         <Switch>
           <Route path="/about"><About/></Route>
           <Route path="/login"><Login/></Route>

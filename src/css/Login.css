@@ -1,0 +1,26 @@
+.LoginBox {
+  color: aquamarine;
+  display: grid;
+  grid-template-rows: 75px 75px 75px;
+  margin-top: 30vh;
+  font-size: 24px;
+}
+.InputUnit {
+  /* grid-row-start: 2;
+  grid-row-end: 3; */
+  display: grid;
+  grid-template-columns: 200px 500px auto 75px;
+}
+.Label {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin: auto;
+}
+.Input {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.LoginButton {
+  width: 400px;
+  margin: 10px auto;
+}

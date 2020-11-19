@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
 
 import api from "../axios"
+import "../css/Login.css"
 const Login = (props) => {
 
     const [username, setUsername] = useState("");
@@ -29,26 +30,32 @@ const Login = (props) => {
         console.log(res)
     }
     return (
-        <div>
-            <label for="uname"><b>Username</b></label>
-            <input 
-            type="text" 
-            placeholder="Enter Username" 
-            name="uname" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-            required
-            ></input>
-            <label for="psw"><b>Password</b></label>
-            <input 
-            type="password" 
-            placeholder="Enter Password" 
-            name="psw" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)}             
-            required></input>
+        <div className="LoginBox">
+            <label className="InputUnit" >
+                <b className="Label">Username:</b>
+                <input 
+                className="Input" 
+                type="text" 
+                placeholder="Enter Username" 
+                
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} 
+                required
+                ></input>
+            </label>
+            <label className="InputUnit" >
+                <b className="Label">Password:</b>
+                <input 
+                className="Input" 
+                type="password" 
+                placeholder="Enter Password" 
 
-            <button onClick={loginHandler} type="submit">Login</button>            
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}             
+                required></input>
+            </label>
+
+            <button className="LoginButton" onClick={loginHandler} type="submit">Login</button>            
         </div>
     )
 }
