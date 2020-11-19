@@ -1,0 +1,21 @@
+.DetailBox {
+  margin-top: 100px;
+  display: grid;
+}
+.Unit {
+  display: grid;
+  grid-template-columns: 200px 300px 600px;
+}
+.DetailLabel {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  position: relative;
+  left: 0;
+}
+.Value {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.DetailBox > :first-child > .Value {
+  text-transform: capitalize;
+}

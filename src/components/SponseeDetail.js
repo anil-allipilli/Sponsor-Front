@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import api from "../axios"
+import "../css/SponseeDetail.css"
 
 const SponseeDetail = (props) => {
     let res
@@ -18,11 +19,7 @@ const SponseeDetail = (props) => {
             try {
                 res = await api.get(
                     "sponsee-detail/", 
-                    {
-                        headers: {
-                        'Authorization': `Bearer ${token}` 
-                    }
-                    }
+                    { headers: {'Authorization': `Bearer ${token}`}}
                 )
                 console.log(res.data)
                 setName(`${res.data.user.first_name} ${res.data.user.last_name}`)
@@ -40,16 +37,40 @@ const SponseeDetail = (props) => {
         fetchdata()
     }, [])
     return (
-        <div>      
-            
-            <div>{name}</div>
-            <div>{email}</div>            
-            <div>{phone}</div>            
-            <div> {reason}</div>
-            <div>{schoolName}</div>
-            <div>{schoolAddress}</div>
-            <div>{birthcertiUrl}</div>
-            <div>{nationalIdUrl}</div>          
+        <div className="DetailBox">            
+            <div className="Unit">
+                <div className="DetailLabel">Name:</div>
+                <div className="Value">{name}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">Email:</div>
+                <div className="Value">{email}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">Phone no:</div>
+                <div className="Value">{phone}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">Reason:</div>
+                <div className="Value">{reason}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">School Name:</div>
+                <div className="Value">{schoolName}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">School Address:</div>
+                <div className="Value">{schoolAddress}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">Birth certificate:</div>
+                <div className="Value">{birthcertiUrl}</div>
+            </div>
+            <div className="Unit">
+                <div className="DetailLabel">National ID:</div>
+                <div className="Value">{nationalIdUrl}</div>
+            </div>
+       
         </div>
     )
 }

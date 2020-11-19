@@ -9,7 +9,8 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     let history = useHistory();
 
-    const loginHandler = async () => {
+    const loginHandler = async (e) => {
+        e.preventDefault();
         const loginFormData = new FormData()
         loginFormData.append("username", username)
         loginFormData.append("password", password)
@@ -30,7 +31,7 @@ const Login = (props) => {
         console.log(res)
     }
     return (
-        <div className="LoginBox">
+        <form className="LoginBox" onSubmit={loginHandler}>
             <label className="InputUnit" >
                 <b className="Label">Username:</b>
                 <input 
@@ -55,8 +56,8 @@ const Login = (props) => {
                 required></input>
             </label>
 
-            <button className="LoginButton" onClick={loginHandler} type="submit">Login</button>            
-        </div>
+            <button className="LoginButton"  type="submit">Login</button>            
+        </form>
     )
 }
 

@@ -4,6 +4,7 @@
   border: 0;
   box-sizing: border-box;
   font-family: "Mukta", sans-serif;
+  font-size: 24px;
 }
 html {
   overflow-y: scroll;
