@@ -1,0 +1,25 @@
+.RegisterSponseeBox {
+  margin-top: 100px;
+  display: grid;
+}
+.RegisterUnit {
+  display: grid;
+  grid-template-columns: 200px 500px auto 75px;
+  height: 70px;
+}
+.RegisterLabel {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin: auto;
+  position: relative;
+  left: 0;
+}
+.RegisterInput {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  padding-left: 50px;
+}
+.RegisterButton {
+  width: 400px;
+  margin: 10px auto;
+}
