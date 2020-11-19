@@ -2,13 +2,14 @@ import React , {useState, useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 
 import api from "../axios"
+import "../css/SchoolInfo.css"
 
 const SchoolInfo = (props) => {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [academicLevel, setAcademicLevel] = useState("");
     const [expectedYearOfCompletion, setExpectedYearOfCompletion] = useState("");
-    const [requestMethod, setRequestMethod] = useState("put");
+    const [requestMethod, setRequestMethod] = useState("patch");
     let history = useHistory();
 
     let res
@@ -24,7 +25,7 @@ const SchoolInfo = (props) => {
                 )
                 console.log(res)
                 if(res.status === 200 ) {
-                    setRequestMethod("put")
+                    setRequestMethod("patch")
                     setName(res.data.name)
                     setAddress(res.data.address)
                     setAcademicLevel(res.data.academic_level)
@@ -40,7 +41,8 @@ const SchoolInfo = (props) => {
         fetchData()
     }, [requestMethod])
 
-    const schoolHandler = async () => {
+    const schoolHandler = async (e) => {
+        e.preventDefault()
         const schoolForm = new FormData()
         schoolForm.append("name", name)
         schoolForm.append("address", address)
@@ -64,10 +66,11 @@ const SchoolInfo = (props) => {
         console.log(res)
     }
     return (
-        <div>
-            <label>
-                <b>Name of the School</b>
-                <input 
+        <form className="SchoolBox" onSubmit={schoolHandler}>
+            <label className="SchoolUnit">
+                <b className="SchoolLabel">Name of the School</b>
+                <input
+                className="SchoolInput" 
                 type="text" 
                 placeholder="Enter school name" 
                 required
@@ -76,9 +79,10 @@ const SchoolInfo = (props) => {
                 ></input>
             </label>
 
-            <label>
-                <b>Address</b>
-                <input 
+            <label className="SchoolUnit">
+                <b className="SchoolLabel">Address</b>
+                <input
+                className="SchoolInput" 
                 type="text" 
                 placeholder="Enter Address" 
                 required
@@ -87,9 +91,10 @@ const SchoolInfo = (props) => {
                 ></input>
             </label>
 
-            <label>
-                <b>Grade</b>
-                <input 
+            <label className="SchoolUnit">
+                <b className="SchoolLabel">Grade</b>
+                <input
+                className="SchoolInput" 
                 type="number" 
                 placeholder="Enter Grade"  
                 required
@@ -98,9 +103,10 @@ const SchoolInfo = (props) => {
                 ></input>
             </label>
 
-            <label>
-                <b>Year of completion</b>
-                <input 
+            <label className="SchoolUnit">
+                <b className="SchoolLabel">Year of completion</b>
+                <input
+                className="SchoolInput" 
                 type="year" 
                 placeholder="Enter year of completion" 
                 required
@@ -110,8 +116,8 @@ const SchoolInfo = (props) => {
 
             </label>
 
-            <button onClick={schoolHandler} type="submit">Add SchoolInfo</button>            
-        </div>
+            <button className="SchoolButton"  type="submit">Add SchoolInfo</button>            
+        </form>
     )
 }
 
