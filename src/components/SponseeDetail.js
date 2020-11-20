@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-
+import { useHistory } from "react-router-dom";
 import api from "../axios"
 import "../css/SponseeDetail.css"
 
@@ -12,7 +12,8 @@ const SponseeDetail = (props) => {
     const [schoolName, setSchoolName] = useState(""); 
     const [schoolAddress, setSchoolAddress] = useState(""); 
     const [birthcertiUrl, setBirthcertiUrl] = useState(""); 
-    const [nationalIdUrl, setNationalIdUrl] = useState(""); 
+    const [nationalIdUrl, setNationalIdUrl] = useState("");
+    let history = useHistory();
     useEffect(() => {
         let token = localStorage.getItem("access")
         async function fetchdata() {
@@ -32,6 +33,9 @@ const SponseeDetail = (props) => {
                 setNationalIdUrl(res.data.national_id)
             } catch(err) {
                 console.log(err)
+                if(err.response.status === 401) {
+                    history.push("/login")
+                }
             }
         }
         fetchdata()

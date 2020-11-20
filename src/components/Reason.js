@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 
 import api from "../axios"
+import "../css/Reason.css"
 const Reason = (props) => {
     const [requestMethod, setRequestMethod] = useState("put");
     const [reason, setReason] = useState("");
@@ -11,7 +12,7 @@ const Reason = (props) => {
     useEffect(() => {
         async function fetchData() {  
             try {
-                console.log(token)
+
                 res = await api.get(
                     "reason/", 
                     {headers: {'Authorization': `Bearer ${token}`}}
@@ -31,7 +32,8 @@ const Reason = (props) => {
         }
         fetchData()
     }, [requestMethod])
-    const reasonhandler = async () => {
+    const reasonhandler = async (e) => {
+        e.preventDefault()
         const reasonForm = new FormData()
         reasonForm.append("reason", reason)
 
@@ -53,20 +55,31 @@ const Reason = (props) => {
         console.log(res)
     }
     return (
-        <div>
-            <label>
-                <b>Reason</b>
-                <textarea 
-                type="text" 
-                placeholder="Enter Reason"
-                required
-                value={reason} 
-                onChange={(e) => setReason(e.target.value)}                 
-                ></textarea>                
+        <form onSubmit={reasonhandler} className="ReasonBox" >
+            <textarea 
+            type="text" 
+            placeholder="Enter Reason"
+            required
+            className="ReasonText"
+            value={reason} 
+            onChange={(e) => setReason(e.target.value)}                 
+            ></textarea>           
+            <button className="ReasonButton" type="submit">Register</button>            
+        </form>
+        // <form>
+        //     <label>
+        //         <b>Reason</b>
+        //         <textarea 
+        //         type="text" 
+        //         placeholder="Enter Reason"
+        //         required
+        //         value={reason} 
+        //         onChange={(e) => setReason(e.target.value)}                 
+        //         ></textarea>                
 
-            </label>
-            <button onClick={reasonhandler} type="submit">Register</button>            
-        </div>
+        //     </label>
+        //     <button onClick={reasonhandler} type="submit">Register</button>            
+        // </form>
     )
 }
 

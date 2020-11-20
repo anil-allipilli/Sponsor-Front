@@ -7,7 +7,7 @@ function Navbar() {
     return (
       <div className="NavBar"> 
         <div className="Logo">
-          <Link className="Link" to="/">Sponsor</Link>
+          <Link className="Link" to="/sponsee-detail">Sponsor</Link>
         </div>        
         <div className="Links">
             <Link className="Link" to="/about">About</Link>

@@ -1,14 +1,12 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
+import "../css/Register.css"
 const Register = (props) => {
     return (
-        <div>
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required></input>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required></input>
-
-            <button type="submit">Register</button>            
+        <div className="SelectCategoryBox">
+            <Link className="Link1" to="/sponsee-register">I want to be Sponsored</Link>
+            <Link className="Link2" to="/sponsor-register">I want to Sponsor</Link>           
         </div>
     )
 }

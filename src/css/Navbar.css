@@ -18,6 +18,7 @@
 .Link {
   padding-right: 75px;
   text-decoration: none;
+  color: black;
 }
 .Link:hover {
   text-decoration: underline;

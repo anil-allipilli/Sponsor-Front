@@ -28,8 +28,8 @@ function App() {
         <Switch>
           <Route path="/about"><About/></Route>
           <Route path="/login"><Login/></Route>
-          {/* <Route path="/register"><Register/></Route> */}
-          <Route path="/register"><SponseeRegister/></Route>
+          <Route path="/register"><Register/></Route>
+          <Route path="/sponsee-register"><SponseeRegister/></Route>
           <Route path="/sponsor-register"><SponsorRegister/></Route>
           <Route path="/school"><SchoolInfo/></Route>
           <Route path="/reason"><Reason/></Route>

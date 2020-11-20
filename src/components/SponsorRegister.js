@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 import api from "../axios"
+import "../css/SponsorRegister.css"
 import { useHistory } from "react-router-dom";
 
 
@@ -39,65 +40,70 @@ const SponserRegister = (props) => {
     }
 
     return (
-        <div>
-            <label>
-                <b>Username:</b>
+        <form className="RegisterSponseeBox" onSubmit={registerHandler}>
+            <label className="RegisterUnit">
+                <b className="RegisterLabel">Username:</b>
                 <input 
+                className="RegisterInput"
                     type="text" 
                     placeholder="Enter Username" 
-
                     value={username} 
                     onChange={(e) => setUsername(e.target.value)} 
                     required
                 ></input>
             </label>
-            <label>
-                <b>Password</b>
+            <label className="RegisterUnit">
+                <b className="RegisterLabel">Password</b>
                 <input 
+                className="RegisterInput"
                     type="password" 
                     placeholder="Enter Password" 
-                    name="psw"
+
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                     required
                 ></input>
             </label>
-            <label>
-                <b>Confirm Password</b>
+            <label className="RegisterUnit">
+                <b className="RegisterLabel">Confirm Password</b>
                 <input 
+                className="RegisterInput"
                     type="password" 
                     placeholder="Confirm Password" 
-                    name="cfpsw" 
+ 
                     value={confirmpassword} 
                     onChange={(e) => setConfirmpassword(e.target.value)} 
                     required
                 ></input>
             </label>
-            <label>
-                <b>First Name</b>
-                <input type="text" 
+            <label className="RegisterUnit">
+                <b className="RegisterLabel">First Name</b>
+                <input 
+                className="RegisterInput"type="text" 
                     placeholder="Enter first name" 
-                    name="first_name" 
+ 
                     value={firstName} 
                     onChange={(e) => setFirstName(e.target.value)} 
                     required
                 ></input>
             </label>
-            <label>
-                <b>Last Name</b>
-                <input type="text" 
+            <label className="RegisterUnit">
+                <b className="RegisterLabel">Last Name</b>
+                <input 
+                className="RegisterInput"type="text" 
                     placeholder="Enter last name" 
-                    name="last_name"
+
                     value={lastName} 
                     onChange={(e) => setLastName(e.target.value)} 
                     required
                 ></input>
             </label>
-            <label>
-                <b>Email</b>
-                <input type="email" 
+            <label className="RegisterUnit">
+                <b className="RegisterLabel">Email</b>
+                <input 
+                className="RegisterInput"type="email" 
                 placeholder="Enter email" 
-                name="email"             
+             
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)} 
                 required
@@ -109,9 +115,8 @@ const SponserRegister = (props) => {
 
 
 
-
-            <button onClick={registerHandler} type="submit">Register</button>            
-        </div>
+            <button className="RegisterButton"  type="submit">Register</button>            
+        </form>
     )
 }
 
