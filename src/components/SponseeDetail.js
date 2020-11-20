@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
 import api from "../axios"
 import "../css/SponseeDetail.css"
-
+import {Link} from "react-router-dom";
 const SponseeDetail = (props) => {
     let res
     const [name, setName] = useState(""); 
@@ -25,12 +25,12 @@ const SponseeDetail = (props) => {
                 console.log(res.data)
                 setName(`${res.data.user.first_name} ${res.data.user.last_name}`)
                 setEmail(res.data.user.email)
-                setPhone(res.data.phone)
-                setReason(res.data.reason.reason)
-                setSchoolName(res.data.school.name)
-                setSchoolAddress(res.data.school.address)
-                setBirthcertiUrl(res.data.birth_certificate)
-                setNationalIdUrl(res.data.national_id)
+                if(res.data.phone !== null)setPhone(res.data.phone)
+                if(res.data.reason !== null) setReason(res.data.reason.reason)
+                if(res.data.school !== null)setSchoolName(res.data.school.name)
+                if(res.data.school !== null)setSchoolAddress(res.data.school.address)
+                if(res.data.birth_certificate !== null)setBirthcertiUrl(res.data.birth_certificate)
+                if(res.data.national_id !== null)setNationalIdUrl(res.data.national_id)
             } catch(err) {
                 console.log(err)
                 if(err.response.status === 401) {
@@ -68,11 +68,11 @@ const SponseeDetail = (props) => {
             </div>
             <div className="Unit">
                 <div className="DetailLabel">Birth certificate:</div>
-                <div className="Value">{birthcertiUrl}</div>
+                <div className="Value"><a href={birthcertiUrl} target="_blank" >Birth certificate</a></div>
             </div>
             <div className="Unit">
                 <div className="DetailLabel">National ID:</div>
-                <div className="Value">{nationalIdUrl}</div>
+                <div className="Value"><a href={nationalIdUrl} target="_blank" >National ID</a></div>
             </div>
        
         </div>

@@ -47,7 +47,7 @@ const SponseeRegister = (props) => {
     return (
         <form className="RegisterSponseeBox" onSubmit={registerHandler}>
             <label className="RegisterUnit">
-                <b className="RegisterLabel">Username:</b>
+                <b className="RegisterLabel">Username</b>
                 <input 
                 className="RegisterInput"
                     type="text" 

@@ -24,7 +24,13 @@ const Login = (props) => {
             })
             localStorage.setItem('access', res.data.access);
             localStorage.setItem('refresh', res.data.refresh);
-            history.push("/sponsee-detail")
+            localStorage.setItem('user', res.data.user);
+            if(res.data.user === "sponsee") {
+                history.push("/sponsee-detail")
+            } else {
+                history.push("/sponsees-list")
+            }
+            
         } catch (err) {
             console.log(err)
         }
