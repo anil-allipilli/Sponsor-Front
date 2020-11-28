@@ -16,7 +16,8 @@ const SponseeRegister = (props) => {
     const [birthCertificate, setBirthCertificate] = useState("");
     const [nationalId, setNationalId] = useState("");
     let history = useHistory();
-    const registerHandler = async () => {
+    const registerHandler = async (e) => {
+        e.preventDefault()
         const registerFormData = new FormData()
         registerFormData.append("username", username)
         registerFormData.append("password", password)
@@ -142,8 +143,8 @@ const SponseeRegister = (props) => {
             <label className="RegisterUnit">
                 <b className="RegisterLabel">Birth Certificate</b>
                 <input 
-                className="RegisterInput"type="file" 
- 
+                className="RegisterInput"
+                type="file" 
                 value={birthCertificate} 
                 onChange={(e) => setBirthCertificate(e.target.value)}  
                 required
@@ -153,8 +154,8 @@ const SponseeRegister = (props) => {
             <label className="RegisterUnit">
                 <b className="RegisterLabel">National ID</b>
                 <input 
-                className="RegisterInput"type="file"
-   
+                className="RegisterInput"
+                type="file"   
                 value={nationalId} 
                 onChange={(e) => setNationalId(e.target.value)} 
                 required

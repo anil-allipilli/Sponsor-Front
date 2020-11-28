@@ -1,0 +1,25 @@
+.SponseesBox {
+  margin-top: 100px;
+  display: grid;
+}
+.SponseeItem {
+  display: grid;
+  grid-template-columns: 75px repeat(4, 300px) 75px;
+}
+.SponseeName {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-transform: capitalize;
+}
+.SponseePhone {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+.SponseeEmail {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+.SponseeReason {
+  grid-column-start: 5;
+  grid-column-end: 6;
+}

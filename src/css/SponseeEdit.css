@@ -19,7 +19,6 @@
 .EditProfile {
   grid-column-start: 4;
   grid-column-end: 5;
-  cursor: pointer;
 }
 .DetailBox > :first-child > .Value {
   text-transform: capitalize;

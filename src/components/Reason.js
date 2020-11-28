@@ -39,7 +39,7 @@ const Reason = (props) => {
 
         let res;
         try {
-            let token = localStorage.getItem("access")
+            // let token = localStorage.getItem("access")
             res = await api({
                 method: requestMethod,
                 url: "reason/",

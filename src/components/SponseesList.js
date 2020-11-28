@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import api from "../axios"
+import { useHistory } from "react-router-dom";
 
+import "../css/SponseesList.css"
 const SponseeList = (props) => {
     let token = localStorage.getItem("access")
     let res
     const [sponsees, setSponsees] = useState([]); 
+    let history = useHistory();
 
-    useEffect(() => {        
+    useEffect(() => {     
+        let user_type = localStorage.getItem("user")
+        if(user_type === "sponsee") history.push("/sponsee-detail")
         async function fetchdata() {
             try {
                 res = await api.get(
@@ -22,20 +27,26 @@ const SponseeList = (props) => {
         }
         fetchdata()
     }, [])
-    let sponeesList = sponsees.map((sponsee) => {
+    let sponeesList = sponsees.map((sponsee, i) => {
         if(sponsee.reason !== null) {
             return (
-                <li>
-                    <h2>{`${sponsee.user.first_name} ${sponsee.user.last_name}`}</h2>
-                    <h3>{sponsee.phone}</h3>
-                    <h3>{sponsee.email}</h3>
-                    <h3>{sponsee.reason.reason}</h3>
-                </li>
+                <div key={i} className="SponseeItem" >
+                    <p className="SponseeName">{`${sponsee.user.first_name} ${sponsee.user.last_name}`}</p>
+                    <p className="SponseePhone">{sponsee.phone}</p>
+                    <p className="SponseeEmail">{sponsee.email}</p>
+                    <p className="SponseeReason">{sponsee.reason.reason}</p>
+                </div>
             )
         }
     })
     return (
-        <div>
+        <div className="SponseesBox">
+        <div  className="SponseeItem" >
+            <p className="SponseeName">Name</p>
+            <p className="SponseePhone">Phone</p>
+            <p className="SponseeEmail">Email</p>
+            <p className="SponseeReason">Reason</p>
+        </div>
         {sponeesList}
         </div>
     )

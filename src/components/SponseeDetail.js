@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import api from "../axios"
 import "../css/SponseeDetail.css"
 import {Link} from "react-router-dom";
+import { Pencil } from 'react-bootstrap-icons';
+
 const SponseeDetail = (props) => {
     let res
     const [name, setName] = useState(""); 
@@ -14,12 +16,23 @@ const SponseeDetail = (props) => {
     const [birthcertiUrl, setBirthcertiUrl] = useState(""); 
     const [nationalIdUrl, setNationalIdUrl] = useState("");
     let history = useHistory();
+    let user_type = localStorage.getItem("user")
+    if(user_type === "sponser") history.push("/sponsees-list")
+    let token = localStorage.getItem("access")
+    let edit = null
+    if(user_type === "sponsee") {
+        edit = <Pencil/>
+    }
+    const goToSponseeEditHandler = () => {
+        history.push("/sponsee-edit")
+    }
+
     useEffect(() => {
-        let token = localStorage.getItem("access")
+        
         async function fetchdata() {
             try {
                 res = await api.get(
-                    "sponsee-detail/", 
+                    "mysponseeprofile/", 
                     { headers: {'Authorization': `Bearer ${token}`}}
                 )
                 console.log(res.data)
@@ -45,34 +58,43 @@ const SponseeDetail = (props) => {
             <div className="Unit">
                 <div className="DetailLabel">Name:</div>
                 <div className="Value">{name}</div>
+                <div className="EditProfile" onClick={goToSponseeEditHandler} >{edit}</div>
+                
             </div>
             <div className="Unit">
                 <div className="DetailLabel">Email:</div>
                 <div className="Value">{email}</div>
+                {/* <div className="EditProfile" >{edit}</div> */}
             </div>
             <div className="Unit">
                 <div className="DetailLabel">Phone no:</div>
                 <div className="Value">{phone}</div>
+                {/* <div className="EditProfile" >{edit}</div> */}
             </div>
             <div className="Unit">
                 <div className="DetailLabel">Reason:</div>
                 <div className="Value">{reason}</div>
+                <div className="EditProfile" onClick={() => history.push("/reason")}>{edit}</div>
             </div>
             <div className="Unit">
                 <div className="DetailLabel">School Name:</div>
                 <div className="Value">{schoolName}</div>
+                <div className="EditProfile" >{edit}</div>
             </div>
             <div className="Unit">
                 <div className="DetailLabel">School Address:</div>
                 <div className="Value">{schoolAddress}</div>
+
             </div>
             <div className="Unit">
                 <div className="DetailLabel">Birth certificate:</div>
                 <div className="Value"><a href={birthcertiUrl} target="_blank" >Birth certificate</a></div>
+                <div className="EditProfile" >{edit}</div>
             </div>
             <div className="Unit">
                 <div className="DetailLabel">National ID:</div>
                 <div className="Value"><a href={nationalIdUrl} target="_blank" >National ID</a></div>
+                <div className="EditProfile" >{edit}</div>
             </div>
        
         </div>

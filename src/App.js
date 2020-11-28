@@ -14,7 +14,7 @@ import SponseeRegister from "./components/SponseeRegister"
 import SponsorRegister from "./components/SponsorRegister"
 import SchoolInfo from "./components/SchoolInfo"
 import Reason from "./components/Reason"
-
+import UserProfileEdit from "./components/UserProfileEdit"
 import SponseesList from "./components/SponseesList"
 import SponseeDetail from "./components/SponseeDetail"
 
@@ -34,6 +34,7 @@ function App() {
           <Route path="/school"><SchoolInfo/></Route>
           <Route path="/reason"><Reason/></Route>
           <Route path="/sponsees-list"><SponseesList/></Route>
+          <Route path="/sponsee-edit"><UserProfileEdit/></Route>
           <Route path="/sponsee-detail"><SponseeDetail/></Route>
           <Route path="/"><Login/></Route>
         </Switch>
