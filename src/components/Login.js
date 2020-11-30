@@ -16,6 +16,7 @@ const Login = (props) => {
         loginFormData.append("password", password)
         let res;
         try {
+            // eslint-disable-next-line
             res = await api({
                 method: "post",
                 url: "api/token/",

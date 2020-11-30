@@ -1,0 +1,27 @@
+.SchoolEditBox {
+  margin-top: 100px;
+  display: grid;
+}
+.SchoolEditUnit {
+  /* vertical-align: center;
+  height: 65px; */
+  display: grid;
+  grid-template-columns: 200px 300px 600px 75px;
+}
+.SchoolDetailLabel {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  position: relative;
+  left: 0;
+}
+.SchooValue {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  border-radius: 15px;
+}
+
+.ReasonButton {
+  position: relative;
+  left: 300px;
+}

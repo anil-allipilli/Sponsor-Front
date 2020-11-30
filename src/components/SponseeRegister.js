@@ -31,6 +31,7 @@ const SponseeRegister = (props) => {
         registerFormData.append("nationalId", nationalId)
         let res;
         try {
+            // eslint-disable-next-line
             res = await api({
                 method: "post",
                 url: "api/createsponsee/",
@@ -145,7 +146,7 @@ const SponseeRegister = (props) => {
                 <input 
                 className="RegisterInput"
                 type="file" 
-                value={birthCertificate} 
+
                 onChange={(e) => setBirthCertificate(e.target.value)}  
                 required
             ></input>
@@ -156,7 +157,7 @@ const SponseeRegister = (props) => {
                 <input 
                 className="RegisterInput"
                 type="file"   
-                value={nationalId} 
+
                 onChange={(e) => setNationalId(e.target.value)} 
                 required
                 ></input>

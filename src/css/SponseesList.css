@@ -4,7 +4,7 @@
 }
 .SponseeItem {
   display: grid;
-  grid-template-columns: 75px repeat(4, 300px) 75px;
+  grid-template-columns: 75px repeat(3, 300px) 500px 75px;
 }
 .SponseeName {
   grid-column-start: 2;

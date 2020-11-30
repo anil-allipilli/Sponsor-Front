@@ -1,20 +1,22 @@
 import React, {useState, useEffect} from 'react'
 import { useHistory } from "react-router-dom";
+import refreshToken from "../../refreshToken"
 
-import api from "../axios"
-import "../css/Reason.css"
+import api from "../../axios"
+import "../../css/Reason.css"
 const Reason = (props) => {
     const [requestMethod, setRequestMethod] = useState("put");
     const [reason, setReason] = useState("");
     let res
-    let token = localStorage.getItem("access")
+    
     let history = useHistory()
     useEffect(() => {
         async function fetchData() {  
             try {
-
+                let token = localStorage.getItem("access")
+                // eslint-disable-next-line
                 res = await api.get(
-                    "reason/", 
+                    "myreason/", 
                     {headers: {'Authorization': `Bearer ${token}`}}
                 )
                 console.log(res)
@@ -28,6 +30,15 @@ const Reason = (props) => {
                 if(err.response.status === 404) {
                     setRequestMethod("post")
                 }
+                if(err.response.status === 401) {
+                    let refresh = await refreshToken()
+                    if(!refresh) {
+                        history.push("/login")
+                    } else {
+                        fetchData()
+                    }
+                }
+                
             }
         }
         fetchData()
@@ -39,10 +50,10 @@ const Reason = (props) => {
 
         let res;
         try {
-            // let token = localStorage.getItem("access")
+            let token = localStorage.getItem("access")
             res = await api({
                 method: requestMethod,
-                url: "reason/",
+                url: "myreason/",
                 data: reasonForm,
                 headers: {'Authorization': `Bearer ${token}`  }
             })
@@ -51,6 +62,14 @@ const Reason = (props) => {
             history.push("/sponsee-detail")
         } catch (err) {
             console.log(err)
+            if(err.response.status === 401) {
+                let refresh = await refreshToken()
+                if(!refresh) {
+                    history.push("/login")
+                } else {
+                    reasonhandler(e)
+                }
+            }
         }
         console.log(res)
     }
@@ -64,7 +83,7 @@ const Reason = (props) => {
             value={reason} 
             onChange={(e) => setReason(e.target.value)}                 
             ></textarea>           
-            <button className="ReasonButton" type="submit">Register</button>            
+            <button className="ReasonButton" type="submit">Submit</button>            
         </form>
         // <form>
         //     <label>

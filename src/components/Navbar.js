@@ -4,16 +4,23 @@ import {Link} from "react-router-dom";
 import "../css/Navbar.css"
 
 function Navbar() {
+  let theNav = <div className="Links">
+  <Link className="Link" to="/about">About</Link>
+  <Link className="Link" to="/login">Login</Link>
+  <Link className="Link" to="/register">Register</Link>
+</div>
+  if(localStorage.getItem("access")) {
+    theNav = (<div className="Links">
+    <Link className="Link" to="/about">About</Link>
+    <Link className="Link" to="/">Logout</Link>
+  </div>)
+  }
     return (
       <div className="NavBar"> 
         <div className="Logo">
           <Link className="Link" to="/sponsee-detail">Sponsor</Link>
         </div>        
-        <div className="Links">
-            <Link className="Link" to="/about">About</Link>
-            <Link className="Link" to="/login">Login</Link>
-            <Link className="Link" to="/register">Register</Link>
-        </div>
+      {theNav}
       </div>
     );
       

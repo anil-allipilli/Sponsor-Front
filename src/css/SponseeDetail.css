@@ -3,6 +3,7 @@
   display: grid;
 }
 .Unit {
+  margin-top: 10px;
   display: grid;
   grid-template-columns: 200px 300px 600px 75px;
 }

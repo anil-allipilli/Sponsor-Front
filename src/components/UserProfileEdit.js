@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
 import api from "../axios"
 import "../css/SponseeDetail.css"
-import {Link} from "react-router-dom";
-import { Pencil } from 'react-bootstrap-icons';
 
+import { Pencil } from 'react-bootstrap-icons';
+import refreshToken from "../refreshToken"
 const UserProfileEdit = (props) => {
     let res
     const [firstName, setFirstName] = useState(""); 
@@ -14,10 +14,9 @@ const UserProfileEdit = (props) => {
 
     let history = useHistory();
     let user_type = localStorage.getItem("user")
-    if(user_type === "sponser") history.push("/sponsees-list")
-    let token = localStorage.getItem("access")
-    console.log(token)
-    let edit = <Pencil/>
+    if(user_type === "sponser") history.push("/sponsees-list")    
+
+ 
     const submitHandler = async (e) => {
         e.preventDefault()
         const editSponseeProfileForm = new FormData()
@@ -29,6 +28,8 @@ const UserProfileEdit = (props) => {
 
         let res;
         try {
+            let token = localStorage.getItem("access")
+
             res = await api({
                 method: "patch",
                 url: "myuserprofile/",
@@ -38,7 +39,14 @@ const UserProfileEdit = (props) => {
             console.log(res)
             history.push("/sponsee-detail")
         } catch (err) {
-            console.log(err)
+            if(err.response.status === 401) {
+                let refresh = await refreshToken()
+                if(!refresh) {
+                    history.push("/login")
+                } else {
+                    submitHandler(e)
+                }
+            }
         }
         console.log(res)
     }
@@ -47,6 +55,8 @@ const UserProfileEdit = (props) => {
     useEffect(() => {        
         async function fetchdata() {
             try {
+                let token = localStorage.getItem("access")
+                // eslint-disable-next-line
                 res = await api.get(
                     "mysponseeprofile/", 
                     { headers: {'Authorization': `Bearer ${token}`}}
@@ -56,12 +66,18 @@ const UserProfileEdit = (props) => {
                 setLastName(res.data.user.last_name)
                 setUserName(res.data.user.username)
                 setEmail(res.data.user.email)
-                if(res.data.phone !== null)setPhone(res.data.phone)
 
             } catch(err) {
                 console.log(err)
                 if(err.response.status === 401) {
-                    history.push("/login")
+                    if(err.response.status === 401) {
+                        let refresh = await refreshToken()
+                        if(!refresh) {
+                            history.push("/login")
+                        } else {
+                            fetchdata()
+                        }
+                    }
                 }
             }
         }

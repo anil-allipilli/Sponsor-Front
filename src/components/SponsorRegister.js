@@ -25,6 +25,7 @@ const SponserRegister = (props) => {
 
         let res;
         try {
+            // eslint-disable-next-line            
             res = await api({
                 method: "post",
                 url: "api/createsponser/",

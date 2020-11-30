@@ -1,8 +1,9 @@
 import React , {useState, useEffect} from 'react'
 import { useHistory } from "react-router-dom";
+import refreshToken from "../../refreshToken"
 
-import api from "../axios"
-import "../css/SchoolInfo.css"
+import api from "../../axios"
+import "../../css/SchoolInfo.css"
 
 const SchoolInfo = (props) => {
     const [name, setName] = useState("");
@@ -13,12 +14,14 @@ const SchoolInfo = (props) => {
     let history = useHistory();
 
     let res
-    let token = localStorage.getItem("access")
+
 
     useEffect(() => {
         async function fetchData() {  
             try {
+                let token = localStorage.getItem("access")
                 console.log(token)
+                // eslint-disable-next-line
                 res = await api.get(
                     "school/", 
                     {headers: {'Authorization': `Bearer ${token}`}}
@@ -35,6 +38,14 @@ const SchoolInfo = (props) => {
                 console.log(err.response.status)
                 if(err.response.status === 404) {
                     setRequestMethod("post")
+                }
+                if(err.response.status === 401) {
+                    let refresh = await refreshToken()
+                    if(!refresh) {
+                        history.push("/login")
+                    } else {
+                        fetchData()
+                    }
                 }
             }
         }
@@ -62,6 +73,14 @@ const SchoolInfo = (props) => {
             history.push("/sponsee-detail")
         } catch (err) {
             console.log(err)
+            if(err.response.status === 401) {
+                let refresh = await refreshToken()
+                if(!refresh) {
+                    history.push("/login")
+                } else {
+                    schoolHandler(e)
+                }
+            }
         }
         console.log(res)
     }
