@@ -20,6 +20,7 @@ const SponseeDetail = (props) => {
     const [nationalIdUrl, setNationalIdUrl] = useState("");
     let history = useHistory();
     let user_type = localStorage.getItem("user")
+    if(user_type === null) history.push("/login")
     if(user_type === "sponser") history.push("/sponsees-list")
 
     let edit = null
@@ -30,15 +31,9 @@ const SponseeDetail = (props) => {
         history.push("/sponsee-edit")
     }
 
-    // const goToUserProfileEditHandler = () => {
-    //     history.push("/sponsee-edit")
-    // }
-    // const goToUserProfileEditHandler = () => {
-    //     history.push("/sponsee-edit")
-    // }
 
-    useEffect(() => {
-        
+
+    useEffect(() => {        
         async function fetchdata() {
             try {
                 let token = localStorage.getItem("access")
@@ -72,7 +67,10 @@ const SponseeDetail = (props) => {
                 }
             }
         }
-        fetchdata()
+        if(user_type === "sponsee") {
+            fetchdata()
+        }
+        
     }, [])
     return (
         <div className="DetailBox">            

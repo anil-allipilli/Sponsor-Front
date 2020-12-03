@@ -4,17 +4,22 @@ import { useHistory } from "react-router-dom";
 import refreshToken from "../refreshToken"
 import "../css/SponseesList.css"
 const SponseeList = (props) => {
-    let token = localStorage.getItem("access")
+
     let res
     const [sponsees, setSponsees] = useState([]); 
     let history = useHistory();
     let user_type = localStorage.getItem("user")
     if(user_type === "sponsee") history.push("/sponsee-detail")
+    const goToReasonHandler = (sponsee) => {
+        console.log(sponsee.reason.reason)
+        history.push(`/reasons/${sponsee.user.username}`)
+    }
 
     useEffect(() => {     
 
         async function fetchdata() {
             try {
+                let token = localStorage.getItem("access")
                 // eslint-disable-next-line
                 res = await api.get(
                     "sponsees/", 
@@ -37,17 +42,19 @@ const SponseeList = (props) => {
         }
         fetchdata()
     }, [])
-    let sponeesList = sponsees.map((sponsee, i) => {
-        if(sponsee.reason !== null) {
+    let sponeesListWithReasons = sponsees.filter(sponsee => sponsee.reason !== null);
+    let sponeesList = sponeesListWithReasons.map((sponsee, i) => {        
             return (
                 <div key={i} className="SponseeItem" >
                     <p className="SponseeName">{`${sponsee.user.first_name} ${sponsee.user.last_name}`}</p>
                     <p className="SponseePhone">{sponsee.phone}</p>
                     <p className="SponseeEmail">{sponsee.user.email}</p>
-                    <p className="SponseeReason">{sponsee.reason.reason.substring(0,20)}</p>
+                    <p className="SponseeReason"
+                     onClick={() => goToReasonHandler(sponsee)}>
+                        {sponsee.reason.reason.substring(0,20)}
+                    </p>
                 </div>
-            )
-        }
+            )        
     })
     return (
         <div className="SponseesBox">

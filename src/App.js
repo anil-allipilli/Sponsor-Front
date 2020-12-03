@@ -21,6 +21,7 @@ import PhoneEdit from "./components/SponseeEdit/PhoneEdit"
 import SchoolEdit from "./components/SponseeEdit/SchoolEdit"
 import UploadBirth from "./components/SponseeEdit/UploadBirth"
 import UploadNID from "./components/SponseeEdit/UploadNID"
+import ReasonView from "./components/ReasonView"
 
 
 function App() {
@@ -28,7 +29,6 @@ function App() {
     <Router>
       <Navbar />
       <div className="App">        
-        
         <Switch>
           <Route path="/about"><About/></Route>
           <Route path="/login"><Login/></Route>
@@ -43,6 +43,7 @@ function App() {
           <Route path="/school-edit"><SchoolEdit/></Route>
           <Route path="/bc-edit"><UploadBirth/></Route>
           <Route path="/nid-edit"><UploadNID/></Route>
+          <Route path="/reasons/:username"><ReasonView/></Route>
           <Route path="/sponsee-detail"><SponseeDetail/></Route>
           <Route path="/"><Login/></Route>
         </Switch>

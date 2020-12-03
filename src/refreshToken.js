@@ -1,6 +1,7 @@
 import api from "./axios"
 
 const  refreshToken = async () => {
+    console.log("refreshing token")
     const refreshTokenFormData = new FormData()
     refreshTokenFormData.append("refresh", localStorage.getItem("refresh"))
     let res;
